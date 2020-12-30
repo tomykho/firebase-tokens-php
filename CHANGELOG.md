@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Unreleased
+
+- Dropped support for PHP <7.4
+
 ## 1.14.0 - 2020-12-09
 
 - Drop the `V3` suffix from handlers using `lcobucci/jwt`
