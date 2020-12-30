@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Dropped support for PHP <7.4
+- Removed deprecated components (mainly the `Firebase\Auth` namespace)
 
 ## 1.14.0 - 2020-12-09
 
