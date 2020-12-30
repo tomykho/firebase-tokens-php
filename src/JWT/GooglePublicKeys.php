@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\JWT;
 
-use Kreait\Clock;
-use Kreait\Clock\SystemClock;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys\Handler;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys\WithHandlerDiscovery;
 use Kreait\Firebase\JWT\Contract\Expirable;
 use Kreait\Firebase\JWT\Contract\Keys;
+use Lcobucci\Clock\Clock;
+use Lcobucci\Clock\SystemClock;
 
 final class GooglePublicKeys implements Keys
 {
@@ -25,7 +25,7 @@ final class GooglePublicKeys implements Keys
 
     public function __construct(Handler $handler = null, Clock $clock = null)
     {
-        $this->clock = $clock ?: new SystemClock();
+        $this->clock = $clock ?: SystemClock::fromUTC();
         $this->handler = $handler ?: new WithHandlerDiscovery($this->clock);
     }
 

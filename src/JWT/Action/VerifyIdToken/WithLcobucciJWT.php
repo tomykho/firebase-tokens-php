@@ -7,12 +7,12 @@ namespace Kreait\Firebase\JWT\Action\VerifyIdToken;
 use DateInterval;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Kreait\Clock;
 use Kreait\Firebase\JWT\Action\VerifyIdToken;
 use Kreait\Firebase\JWT\Contract\Keys;
 use Kreait\Firebase\JWT\Contract\Token;
 use Kreait\Firebase\JWT\Error\IdTokenVerificationFailed;
 use Kreait\Firebase\JWT\Token as TokenInstance;
+use Lcobucci\Clock\Clock;
 use Lcobucci\Clock\FrozenClock;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer;
@@ -136,9 +136,6 @@ final class WithLcobucciJWT implements Handler
         throw IdTokenVerificationFailed::withTokenAndReasons($token->toString(), ["No public key matching the key ID '{$keyId}' was found to verify the signature of this token."]);
     }
 
-    /**
-     * @return void
-     */
     private function assertUserAuthedAt(JWT\Plain $token, DateTimeInterface $now)
     {
         /** @var int|DateTimeImmutable $authTime */
@@ -161,9 +158,6 @@ final class WithLcobucciJWT implements Handler
         }
     }
 
-    /**
-     * @return void
-     */
     private function assertTenantId(JWT\Plain $token, string $tenantId)
     {
         $claim = $token->claims()->get('firebase');

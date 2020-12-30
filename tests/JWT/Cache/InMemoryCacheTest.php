@@ -6,8 +6,8 @@ namespace Kreait\Firebase\JWT\Tests\Cache;
 
 use DateInterval;
 use DateTimeImmutable;
-use Kreait\Clock\FrozenClock;
 use Kreait\Firebase\JWT\Cache\InMemoryCache;
+use Lcobucci\Clock\FrozenClock;
 use PHPUnit\Framework\TestCase;
 
 /**

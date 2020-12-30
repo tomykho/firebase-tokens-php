@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Kreait\Firebase\JWT\Tests\Action\VerifyIdToken;
 
 use DateTimeImmutable;
-use Kreait\Clock\FrozenClock;
 use Kreait\Firebase\JWT\Action\VerifyIdToken;
 use Kreait\Firebase\JWT\Action\VerifyIdToken\Handler;
 use Kreait\Firebase\JWT\Contract\Keys;
@@ -13,6 +12,7 @@ use Kreait\Firebase\JWT\Error\IdTokenVerificationFailed;
 use Kreait\Firebase\JWT\Keys\StaticKeys;
 use Kreait\Firebase\JWT\Tests\Util\IdToken;
 use Kreait\Firebase\JWT\Tests\Util\KeyPair;
+use Lcobucci\Clock\FrozenClock;
 
 /**
  * @internal

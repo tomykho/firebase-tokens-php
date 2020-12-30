@@ -6,11 +6,11 @@ namespace Kreait\Firebase\JWT\Tests;
 
 use DateInterval;
 use DateTimeImmutable;
-use Kreait\Clock\FrozenClock;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 use Kreait\Firebase\JWT\GooglePublicKeys;
 use Kreait\Firebase\JWT\Keys\ExpiringKeys;
 use Kreait\Firebase\JWT\Keys\StaticKeys;
+use Lcobucci\Clock\FrozenClock;
 use PHPUnit\Framework\TestCase;
 
 /**

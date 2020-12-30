@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Kreait\Firebase\JWT\Tests\Action\FetchGooglePublicKeys;
 
 use DateTimeImmutable;
-use Kreait\Clock\FrozenClock;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys\Handler;
+use Lcobucci\Clock\FrozenClock;
 
 /**
  * @internal

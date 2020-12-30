@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Kreait\Firebase\JWT;
 
 use DateInterval;
-use Kreait\Clock\SystemClock;
 use Kreait\Firebase\JWT\Action\CreateCustomToken;
 use Kreait\Firebase\JWT\Action\CreateCustomToken\Handler;
 use Kreait\Firebase\JWT\Action\CreateCustomToken\WithHandlerDiscovery;
 use Kreait\Firebase\JWT\Contract\Token;
 use Kreait\Firebase\JWT\Error\CustomTokenCreationFailed;
 use Kreait\Firebase\JWT\Value\Duration;
+use Lcobucci\Clock\SystemClock;
 
 final class CustomTokenGenerator
 {
@@ -28,7 +28,7 @@ final class CustomTokenGenerator
 
     public static function withClientEmailAndPrivateKey(string $clientEmail, string $privateKey): self
     {
-        $handler = new WithHandlerDiscovery($clientEmail, $privateKey, new SystemClock());
+        $handler = new WithHandlerDiscovery($clientEmail, $privateKey, SystemClock::fromUTC());
 
         return new self($handler);
     }

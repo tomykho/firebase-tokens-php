@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 
-use Kreait\Clock;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 use Kreait\Firebase\JWT\Contract\Keys;
 use Kreait\Firebase\JWT\Error\FetchingGooglePublicKeysFailed;
 use Kreait\Firebase\JWT\Keys\ExpiringKeys;
 use Kreait\Firebase\JWT\Keys\StaticKeys;
+use Lcobucci\Clock\Clock;
 
 final class WithStreamContext implements Handler
 {

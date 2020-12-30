@@ -6,10 +6,10 @@ namespace Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use Kreait\Clock;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 use Kreait\Firebase\JWT\Contract\Keys;
 use Kreait\Firebase\JWT\Error\DiscoveryFailed;
+use Lcobucci\Clock\Clock;
 
 final class WithHandlerDiscovery implements Handler
 {

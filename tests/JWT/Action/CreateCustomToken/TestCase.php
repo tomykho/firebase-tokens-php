@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Kreait\Firebase\JWT\Tests\Action\CreateCustomToken;
 
 use DateTimeImmutable;
-use Kreait\Clock\FrozenClock;
 use Kreait\Firebase\JWT\Action\CreateCustomToken;
 use Kreait\Firebase\JWT\Action\CreateCustomToken\Handler;
 use Kreait\Firebase\JWT\Error\CustomTokenCreationFailed;
+use Lcobucci\Clock\FrozenClock;
 
 /**
  * @internal

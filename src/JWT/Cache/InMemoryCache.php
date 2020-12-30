@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Kreait\Firebase\JWT\Cache;
 
 use DateInterval;
-use Kreait\Clock;
-use Kreait\Clock\SystemClock;
+use Lcobucci\Clock\Clock;
+use Lcobucci\Clock\SystemClock;
 use Psr\SimpleCache\CacheInterface;
 
 final class InMemoryCache implements CacheInterface
@@ -19,7 +19,7 @@ final class InMemoryCache implements CacheInterface
 
     private function __construct()
     {
-        $this->clock = new SystemClock();
+        $this->clock = SystemClock::fromUTC();
     }
 
     public static function createEmpty(): self

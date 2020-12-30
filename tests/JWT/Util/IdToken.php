@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Kreait\Firebase\JWT\Tests\Util;
 
 use Firebase\JWT\JWT;
-use Kreait\Clock;
-use Kreait\Clock\SystemClock;
+use Lcobucci\Clock\Clock;
+use Lcobucci\Clock\SystemClock;
 
 /**
  * @internal
@@ -33,7 +33,7 @@ final class IdToken
 
     public function __construct(Clock $clock = null)
     {
-        $this->clock = $clock ?: new SystemClock();
+        $this->clock = $clock ?: SystemClock::fromUTC();
         $this->payload = $this->defaultPayload();
         $this->privateKey = KeyPair::privateKey();
     }

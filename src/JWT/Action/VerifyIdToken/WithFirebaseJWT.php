@@ -8,12 +8,12 @@ use DomainException;
 use Firebase\JWT\BeforeValidException;
 use Firebase\JWT\ExpiredException;
 use Firebase\JWT\JWT;
-use Kreait\Clock;
 use Kreait\Firebase\JWT\Action\VerifyIdToken;
 use Kreait\Firebase\JWT\Contract\Keys;
 use Kreait\Firebase\JWT\Contract\Token;
 use Kreait\Firebase\JWT\Error\IdTokenVerificationFailed;
 use Kreait\Firebase\JWT\Token as TokenInstance;
+use Lcobucci\Clock\Clock;
 use Throwable;
 use UnexpectedValueException;
 
@@ -125,8 +125,6 @@ final class WithFirebaseJWT implements Handler
     /**
      * @param int|null $timestamp
      * @param int $leeway
-     *
-     * @return void
      */
     private function restoreJWTStaticVariables($timestamp, $leeway)
     {

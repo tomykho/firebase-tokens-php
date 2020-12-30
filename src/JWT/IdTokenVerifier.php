@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Kreait\Firebase\JWT;
 
 use InvalidArgumentException;
-use Kreait\Clock\SystemClock;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 use Kreait\Firebase\JWT\Action\VerifyIdToken;
 use Kreait\Firebase\JWT\Cache\InMemoryCache;
 use Kreait\Firebase\JWT\Contract\Token;
 use Kreait\Firebase\JWT\Error\IdTokenVerificationFailed;
+use Lcobucci\Clock\SystemClock;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\SimpleCache\CacheInterface;
 
@@ -37,7 +37,7 @@ final class IdTokenVerifier
      */
     public static function createWithProjectIdAndCache(string $projectId, $cache): self
     {
-        $clock = new SystemClock();
+        $clock = SystemClock::fromUTC();
         $keyHandler = new FetchGooglePublicKeys\WithHandlerDiscovery($clock);
 
         $keyHandler = $cache instanceof CacheInterface

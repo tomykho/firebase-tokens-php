@@ -12,8 +12,8 @@ use Kreait\Firebase\JWT\Contract\KeysTrait;
 
 final class ExpiringKeys implements Expirable, Keys
 {
-    use KeysTrait;
     use ExpirableTrait;
+    use KeysTrait;
 
     private function __construct()
     {

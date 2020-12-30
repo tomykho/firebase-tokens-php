@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Kreait\Firebase\JWT\Action\VerifyIdToken;
 
 use Firebase\JWT\JWT;
-use Kreait\Clock;
 use Kreait\Firebase\JWT\Action\VerifyIdToken;
 use Kreait\Firebase\JWT\Contract\Keys;
 use Kreait\Firebase\JWT\Contract\Token;
 use Kreait\Firebase\JWT\Error\DiscoveryFailed;
+use Lcobucci\Clock\Clock;
 use Lcobucci\JWT\Configuration;
 
 final class WithHandlerDiscovery implements Handler
