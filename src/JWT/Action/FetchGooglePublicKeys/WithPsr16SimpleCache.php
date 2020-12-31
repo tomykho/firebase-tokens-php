@@ -32,8 +32,7 @@ final class WithPsr16SimpleCache implements Handler
     public function handle(FetchGooglePublicKeys $action): Keys
     {
         $now = $this->clock->now();
-
-        $cacheKey = \md5(\get_class($action));
+        $cacheKey = \sha1(\get_class($action));
 
         /** @noinspection PhpUnhandledExceptionInspection */
         /** @var Keys|null $keys */

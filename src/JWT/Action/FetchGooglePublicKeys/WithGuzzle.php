@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 
+use DateInterval;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
@@ -13,7 +14,7 @@ use Kreait\Firebase\JWT\Keys\ExpiringKeys;
 use Kreait\Firebase\JWT\Keys\StaticKeys;
 use Lcobucci\Clock\Clock;
 
-final class WithGuzzle6 implements Handler
+final class WithGuzzle implements Handler
 {
     /** @var ClientInterface */
     private $client;
@@ -48,9 +49,7 @@ final class WithGuzzle6 implements Handler
 
         $expiresAt = null;
         if (((int) \preg_match('/max-age=(\d+)/i', $response->getHeaderLine('Cache-Control'), $matches)) === 1) {
-            $maxAge = (int) $matches[1];
-            $now = $this->clock->now();
-            $expiresAt = $now->setTimestamp($now->getTimestamp() + $maxAge);
+            $expiresAt = $this->clock->now()->add(new DateInterval('PT'.$matches[1].'S'));
         }
 
         $keys = \json_decode((string) $response->getBody(), true);

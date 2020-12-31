@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\JWT;
 
+use GuzzleHttp\Client;
 use InvalidArgumentException;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys;
 use Kreait\Firebase\JWT\Action\VerifyIdToken;
@@ -38,14 +39,14 @@ final class IdTokenVerifier
     public static function createWithProjectIdAndCache(string $projectId, $cache): self
     {
         $clock = SystemClock::fromUTC();
-        $keyHandler = new FetchGooglePublicKeys\WithHandlerDiscovery($clock);
+        $baseKeyHandler = new FetchGooglePublicKeys\WithGuzzle(new Client(['http_errors' => false]), $clock);
 
         $keyHandler = $cache instanceof CacheInterface
-            ? new FetchGooglePublicKeys\WithPsr16SimpleCache($keyHandler, $cache, $clock)
-            : new FetchGooglePublicKeys\WithPsr6Cache($keyHandler, $cache, $clock);
+            ? new FetchGooglePublicKeys\WithPsr16SimpleCache($baseKeyHandler, $cache, $clock)
+            : new FetchGooglePublicKeys\WithPsr6Cache($baseKeyHandler, $cache, $clock);
 
         $keys = new GooglePublicKeys($keyHandler, $clock);
-        $handler = new VerifyIdToken\WithHandlerDiscovery($projectId, $keys, $clock);
+        $handler = new VerifyIdToken\WithLcobucciJWT($projectId, $keys, $clock);
 
         return new self($handler);
     }

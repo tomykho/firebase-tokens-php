@@ -15,7 +15,6 @@ use Kreait\Firebase\JWT\Token as TokenInstance;
 use Lcobucci\Clock\Clock;
 use Lcobucci\Clock\FrozenClock;
 use Lcobucci\JWT\Configuration;
-use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token as JWT;
@@ -37,9 +36,6 @@ final class WithLcobucciJWT implements Handler
 
     /** @var Clock */
     private $clock;
-
-    /** @var Signer */
-    private $signer;
 
     /** @var Configuration */
     private $config;

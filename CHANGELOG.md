@@ -4,6 +4,8 @@
 
 - Dropped support for PHP <7.4
 - Removed deprecated components (mainly the `Firebase\Auth` namespace)
+- Removed `stream_context_*` HTTP handler
+- Removed `firebase/php-jwt` JWT handler
 
 ## 1.14.0 - 2020-12-09
 
