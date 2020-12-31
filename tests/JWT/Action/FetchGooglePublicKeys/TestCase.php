@@ -16,11 +16,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     abstract protected function createHandler(): Handler;
 
-    /** @var FrozenClock */
-    protected $clock;
+    protected FrozenClock $clock;
 
-    /** @var FetchGooglePublicKeys */
-    protected $action;
+    protected FetchGooglePublicKeys $action;
 
     protected function setUp(): void
     {

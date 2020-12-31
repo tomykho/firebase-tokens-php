@@ -9,7 +9,7 @@ use Kreait\Firebase\JWT\Contract\Keys;
 final class StaticKeys implements Keys
 {
     /** @var array<string, string> */
-    private $values = [];
+    private array $values = [];
 
     private function __construct()
     {

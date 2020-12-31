@@ -17,15 +17,14 @@ use PHPUnit\Framework\TestCase;
  */
 final class CustomTokenGeneratorTest extends TestCase
 {
-    private $handler;
+    private ?Handler $handler = null;
 
-    /** @var CustomTokenGenerator */
-    private $generator;
+    private ?CustomTokenGenerator $generator = null;
 
     protected function setUp(): void
     {
         $this->handler = new class() implements Handler {
-            public $action;
+            public ?CreateCustomToken $action = null;
 
             public function handle(CreateCustomToken $action): Token
             {
@@ -55,7 +54,7 @@ final class CustomTokenGeneratorTest extends TestCase
         $this->generator->createCustomToken('uid');
         $this->assertSame('uid', $this->handler->action->uid());
         $this->assertEmpty($this->handler->action->customClaims());
-        $this->assertTrue(Duration::fromDateIntervalSpec(CreateCustomToken::DEFAULT_TTL)->equals($this->handler->action->timeToLive()));
+        $this->assertTrue(Duration::fromDateIntervalSpec('PT1H')->equals($this->handler->action->timeToLive()));
     }
 
     /**

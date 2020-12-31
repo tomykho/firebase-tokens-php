@@ -11,20 +11,18 @@ use Kreait\Firebase\JWT\Error\CustomTokenCreationFailed;
 use Kreait\Firebase\JWT\Token as TokenInstance;
 use Lcobucci\Clock\Clock;
 use Lcobucci\JWT\Configuration;
-use Lcobucci\JWT\Signer;
+use Lcobucci\JWT\Signer\Key\InMemory;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token\Plain;
 use Throwable;
 
 final class WithLcobucciJWT implements Handler
 {
-    /** @var string */
-    private $clientEmail;
+    private string $clientEmail;
 
-    /** @var Clock */
-    private $clock;
+    private Clock $clock;
 
-    /** @var Configuration */
-    private $config;
+    private Configuration $config;
 
     public function __construct(string $clientEmail, string $privateKey, Clock $clock)
     {
@@ -32,8 +30,8 @@ final class WithLcobucciJWT implements Handler
         $this->clock = $clock;
 
         $this->config = Configuration::forSymmetricSigner(
-            new Signer\Rsa\Sha256(),
-            Signer\Key\InMemory::plainText($privateKey)
+            new Sha256(),
+            InMemory::plainText($privateKey)
         );
     }
 

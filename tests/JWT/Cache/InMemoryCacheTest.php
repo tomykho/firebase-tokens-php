@@ -15,14 +15,11 @@ use PHPUnit\Framework\TestCase;
  */
 final class InMemoryCacheTest extends TestCase
 {
-    /** @var FrozenClock */
-    private $clock;
+    private ?FrozenClock $clock = null;
 
-    /** @var InMemoryCache */
-    private $cache;
+    private ?InMemoryCache $cache = null;
 
-    /** @var int */
-    private $ttl;
+    private ?int $ttl = null;
 
     protected function setUp(): void
     {
@@ -96,11 +93,11 @@ final class InMemoryCacheTest extends TestCase
     public function it_returns_multiple_items()
     {
         $values = ['foo' => 'foo', 'bar' => 'bar'];
-        $expected = $values + ['default' => 'default'];
 
         foreach ($values as $key => $value) {
             $this->cache->set($key, $value, $this->ttl);
         }
+        $expected = $values + ['default' => 'default'];
 
         $this->assertEquals(
             $expected,

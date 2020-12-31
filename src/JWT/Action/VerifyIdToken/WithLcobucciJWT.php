@@ -28,17 +28,13 @@ use Throwable;
 
 final class WithLcobucciJWT implements Handler
 {
-    /** @var string */
-    private $projectId;
+    private string $projectId;
 
-    /** @var Keys */
-    private $keys;
+    private Keys $keys;
 
-    /** @var Clock */
-    private $clock;
+    private Clock $clock;
 
-    /** @var Configuration */
-    private $config;
+    private Configuration $config;
 
     public function __construct(string $projectId, Keys $keys, Clock $clock)
     {
@@ -82,9 +78,7 @@ final class WithLcobucciJWT implements Handler
             }
         } catch (RequiredConstraintsViolated $e) {
             $errors = \array_map(
-                static function (ConstraintViolation $violation): string {
-                    return '- '.$violation->getMessage();
-                },
+                static fn (ConstraintViolation $violation): string => '- '.$violation->getMessage(),
                 $e->violations()
             );
         }

@@ -13,14 +13,11 @@ use Psr\Cache\CacheItemPoolInterface;
 
 final class WithPsr6Cache implements Handler
 {
-    /** @var Handler */
-    private $handler;
+    private Handler $handler;
 
-    /** @var CacheItemPoolInterface */
-    private $cache;
+    private CacheItemPoolInterface $cache;
 
-    /** @var Clock */
-    private $clock;
+    private Clock $clock;
 
     public function __construct(Handler $handler, CacheItemPoolInterface $cache, Clock $clock)
     {
@@ -59,7 +56,7 @@ final class WithPsr6Cache implements Handler
         } catch (FetchingGooglePublicKeysFailed $e) {
             $reason = \sprintf(
                 'The inner handler of %s (%s) failed in fetching keys: %s',
-                __CLASS__, \get_class($this->handler), $e->getMessage()
+                self::class, \get_class($this->handler), $e->getMessage()
             );
 
             throw FetchingGooglePublicKeysFailed::because($reason, $e->getCode(), $e);

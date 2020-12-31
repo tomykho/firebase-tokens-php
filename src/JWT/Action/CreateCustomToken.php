@@ -10,21 +10,18 @@ use Kreait\Firebase\JWT\Value\Duration;
 
 final class CreateCustomToken
 {
-    const MINIMUM_TTL = 'PT1S';
-    const MAXIMUM_TTL = 'PT1H';
-    const DEFAULT_TTL = self::MAXIMUM_TTL;
+    private const MINIMUM_TTL = 'PT1S';
+    private const MAXIMUM_TTL = 'PT1H';
+    private const DEFAULT_TTL = self::MAXIMUM_TTL;
 
-    /** @var string */
-    private $uid;
+    private string $uid;
 
-    /** @var string|null */
-    private $tenantId;
+    private ?string $tenantId = null;
 
     /** @var array<string, mixed> */
-    private $customClaims = [];
+    private array $customClaims = [];
 
-    /** @var Duration */
-    private $ttl;
+    private Duration $ttl;
 
     private function __construct()
     {
@@ -114,10 +111,7 @@ final class CreateCustomToken
         return $this->uid;
     }
 
-    /**
-     * @return string|null
-     */
-    public function tenantId()
+    public function tenantId(): ?string
     {
         return $this->tenantId;
     }

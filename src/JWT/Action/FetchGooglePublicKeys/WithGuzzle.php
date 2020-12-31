@@ -16,11 +16,9 @@ use Lcobucci\Clock\Clock;
 
 final class WithGuzzle implements Handler
 {
-    /** @var ClientInterface */
-    private $client;
+    private ClientInterface $client;
 
-    /** @var Clock */
-    private $clock;
+    private Clock $clock;
 
     public function __construct(ClientInterface $client, Clock $clock)
     {
@@ -48,13 +46,14 @@ final class WithGuzzle implements Handler
         }
 
         $expiresAt = null;
-        if (((int) \preg_match('/max-age=(\d+)/i', $response->getHeaderLine('Cache-Control'), $matches)) === 1) {
+        $cacheControl = $response->getHeaderLine('Cache-Control');
+        if (((int) \preg_match('/max-age=(\d+)/i', $cacheControl, $matches)) === 1) {
             $expiresAt = $this->clock->now()->add(new DateInterval('PT'.$matches[1].'S'));
         }
 
         $keys = \json_decode((string) $response->getBody(), true);
 
-        if ($expiresAt) {
+        if ($expiresAt !== null) {
             return ExpiringKeys::withValuesAndExpirationTime($keys, $expiresAt);
         }
 

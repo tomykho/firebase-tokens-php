@@ -7,6 +7,7 @@ namespace Kreait\Firebase\JWT;
 use DateInterval;
 use Kreait\Firebase\JWT\Action\CreateCustomToken;
 use Kreait\Firebase\JWT\Action\CreateCustomToken\Handler;
+use Kreait\Firebase\JWT\Action\CreateCustomToken\WithLcobucciJWT;
 use Kreait\Firebase\JWT\Contract\Token;
 use Kreait\Firebase\JWT\Error\CustomTokenCreationFailed;
 use Kreait\Firebase\JWT\Value\Duration;
@@ -14,11 +15,9 @@ use Lcobucci\Clock\SystemClock;
 
 final class CustomTokenGenerator
 {
-    /** @var Handler */
-    private $handler;
+    private Handler $handler;
 
-    /** @var string|null */
-    private $tenantId;
+    private ?string $tenantId = null;
 
     public function __construct(Handler $handler)
     {
@@ -27,7 +26,7 @@ final class CustomTokenGenerator
 
     public static function withClientEmailAndPrivateKey(string $clientEmail, string $privateKey): self
     {
-        $handler = new CreateCustomToken\WithLcobucciJWT($clientEmail, $privateKey, SystemClock::fromUTC());
+        $handler = new WithLcobucciJWT($clientEmail, $privateKey, SystemClock::fromUTC());
 
         return new self($handler);
     }

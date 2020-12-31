@@ -20,8 +20,7 @@ use Kreait\Firebase\JWT\Keys\StaticKeys;
  */
 final class WithGuzzleTest extends TestCase
 {
-    /** @var MockHandler */
-    private $mockHandler;
+    private MockHandler $mockHandler;
 
     protected function setUp(): void
     {

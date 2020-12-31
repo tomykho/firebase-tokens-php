@@ -12,7 +12,6 @@ jobs:
         strategy:
             matrix:
                 php: ["7.4", "8.0"]
-                stability: ["prefer-lowest", "prefer-stable"]
 
         steps:
             - name: Checkout code
@@ -39,10 +38,13 @@ jobs:
                   restore-keys: ${{ runner.os }}-composer-
 
             - name: Install dependencies
-              run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress
+              run: composer update --prefer-dist --no-interaction --no-progress
 
             - name: Setup Problem Matchers for PHPUnit
               run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+            - name: Run PHPStan
+              run: vendor/bin/phpstan analyse --no-progress
 
             - name: Run PHPUnit
               run: vendor/bin/phpunit

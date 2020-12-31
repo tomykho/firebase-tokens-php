@@ -7,29 +7,25 @@ namespace Kreait\Firebase\JWT\Tests\Action\VerifyIdToken;
 use DateTimeImmutable;
 use Kreait\Firebase\JWT\Action\VerifyIdToken;
 use Kreait\Firebase\JWT\Action\VerifyIdToken\Handler;
-use Kreait\Firebase\JWT\Contract\Keys;
 use Kreait\Firebase\JWT\Error\IdTokenVerificationFailed;
 use Kreait\Firebase\JWT\Keys\StaticKeys;
 use Kreait\Firebase\JWT\Tests\Util\IdToken;
 use Kreait\Firebase\JWT\Tests\Util\KeyPair;
 use Lcobucci\Clock\FrozenClock;
+use stdClass;
 
 /**
  * @internal
  */
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
-    /** @var string */
-    protected $projectId = 'project-id';
+    protected string $projectId = 'project-id';
 
-    /** @var Keys */
-    protected $keys;
+    protected StaticKeys $keys;
 
-    /** @var FrozenClock */
-    protected $clock;
+    protected FrozenClock $clock;
 
-    /** @var IdToken */
-    private $idToken;
+    private IdToken $idToken;
 
     abstract protected function createHandler(): Handler;
 
@@ -207,7 +203,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      */
     public function it_verifies_a_token_with_an_expected_tenant_id()
     {
-        $firebaseClaim = new \stdClass();
+        $firebaseClaim = new stdClass();
         $firebaseClaim->tenant = 'my-tenant';
         $idToken = $this->idToken->withClaim('firebase', $firebaseClaim)->build();
 
@@ -220,7 +216,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      */
     public function it_verifies_a_token_with_a_mismatching_tenant_id()
     {
-        $firebaseClaim = new \stdClass();
+        $firebaseClaim = new stdClass();
         $firebaseClaim->tenant = 'unexpected-tenant';
         $idToken = $this->idToken->withClaim('firebase', $firebaseClaim)->build();
 
@@ -233,7 +229,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      */
     public function it_verifies_a_token_without_a_tenant_id_when_it_expects_one()
     {
-        $firebaseClaim = new \stdClass();
+        $firebaseClaim = new stdClass();
         $idToken = $this->idToken->withClaim('firebase', $firebaseClaim)->build();
 
         $this->expectException(IdTokenVerificationFailed::class);

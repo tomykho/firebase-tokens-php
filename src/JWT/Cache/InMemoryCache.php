@@ -12,10 +12,9 @@ use Psr\SimpleCache\CacheInterface;
 final class InMemoryCache implements CacheInterface
 {
     /** @var array<string, mixed> */
-    private $items = [];
+    private array $items = [];
 
-    /** @var Clock */
-    private $clock;
+    private Clock $clock;
 
     private function __construct()
     {
@@ -65,7 +64,7 @@ final class InMemoryCache implements CacheInterface
             $expires = $now->modify("+{$ttl} seconds");
         }
 
-        if (!$expires) {
+        if ($expires === null) {
             $this->delete($key);
 
             return true;

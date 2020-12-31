@@ -12,10 +12,9 @@ use Kreait\Firebase\JWT\Contract\Keys;
 final class ExpiringKeys implements Expirable, Keys
 {
     /** @var array<string, string> */
-    private $values = [];
+    private array $values = [];
 
-    /** @var DateTimeImmutable */
-    private $expirationTime;
+    private DateTimeImmutable $expirationTime;
 
     private function __construct()
     {

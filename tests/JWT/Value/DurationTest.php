@@ -82,16 +82,16 @@ class DurationTest extends TestCase
         $given = Duration::make('60 minutes');
         $equal = Duration::make('1 hour');
         $larger = Duration::make('61 minutes');
-        $smaller = Duration::make('59 minutes');
+
         $this->assertTrue($given->equals($equal));
-        $this->assertTrue($given->isLargerThan($smaller));
+        $this->assertTrue($larger->isLargerThan($given));
         $this->assertTrue($given->isSmallerThan($larger));
     }
 
     /**
      * @test
      */
-    public function it_can_be_casted_to_a_date_interval_spec_string()
+    public function it_can_be_cast_to_a_date_interval_spec_string()
     {
         $this->assertSame('PT1H', (string) Duration::make('1 hour'));
     }

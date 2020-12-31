@@ -6,6 +6,7 @@ namespace Kreait\Firebase\JWT\Tests\Action\FetchGooglePublicKeys;
 
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys\Handler;
 use Kreait\Firebase\JWT\Action\FetchGooglePublicKeys\WithPsr6Cache;
+use Kreait\Firebase\JWT\Contract\Expirable;
 use Kreait\Firebase\JWT\Error\FetchingGooglePublicKeysFailed;
 use Kreait\Firebase\JWT\Keys\ExpiringKeys;
 use Kreait\Firebase\JWT\Keys\StaticKeys;
@@ -23,14 +24,11 @@ final class WithPsr6CacheTest extends TestCase
 
     private $inner;
 
-    /** @var ExpiringKeys */
-    private $expiringKeys;
+    private ExpiringKeys $expiringKeys;
 
-    /** @var ExpiringKeys */
-    private $expiredKeys;
+    private Expirable $expiredKeys;
 
-    /** @var StaticKeys */
-    private $nonExpiringKeys;
+    private StaticKeys $nonExpiringKeys;
 
     protected function setUp(): void
     {

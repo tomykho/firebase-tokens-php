@@ -12,14 +12,15 @@ use Throwable;
 /**
  * Adapted duration class from gamez/duration.
  *
+ * @internal
+ *
  * @see https://github.com/jeromegamez/duration-php
  */
 final class Duration
 {
-    const NONE = 'PT0S';
+    private const NONE = 'PT0S';
 
-    /** @var DateInterval */
-    private $value;
+    private DateInterval $value;
 
     private function __construct()
     {
@@ -49,7 +50,7 @@ final class Duration
         try {
             $interval = DateInterval::createFromDateString($value);
         } catch (Throwable $e) {
-            throw new InvalidArgumentException("Unable to determine a duration from '{$value}'");
+            throw new InvalidArgumentException("Unable to determine a duration from '{$value}'", $e->getCode(), $e);
         }
 
         $duration = self::fromDateInterval($interval);
@@ -83,7 +84,7 @@ final class Duration
         try {
             $interval = new DateInterval($spec);
         } catch (Throwable $e) {
-            throw new InvalidArgumentException("'{$spec}' is not a valid DateInterval specification");
+            throw new InvalidArgumentException("'{$spec}' is not a valid DateInterval specification", $e->getCode(), $e);
         }
 
         return self::fromDateInterval($interval);
@@ -162,7 +163,7 @@ final class Duration
 
     private static function now(): DateTimeImmutable
     {
-        return new DateTimeImmutable('@'.\time());
+        return new DateTimeImmutable();
     }
 
     private static function normalizeInterval(DateInterval $value): DateInterval

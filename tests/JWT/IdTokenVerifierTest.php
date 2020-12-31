@@ -17,15 +17,14 @@ use Psr\Cache\CacheItemPoolInterface;
  */
 final class IdTokenVerifierTest extends TestCase
 {
-    private $handler;
+    private Handler $handler;
 
-    /** @var IdTokenVerifier */
-    private $verifier;
+    private IdTokenVerifier $verifier;
 
     protected function setUp(): void
     {
         $this->handler = new class() implements Handler {
-            public $action;
+            public ?VerifyIdToken $action = null;
 
             public function handle(VerifyIdToken $action): Token
             {

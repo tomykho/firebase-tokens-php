@@ -19,11 +19,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     abstract protected static function createHandlerWithInvalidPrivateKey(): Handler;
 
-    /** @var FrozenClock */
-    protected static $clock;
+    protected static FrozenClock $clock;
 
-    /** @var Handler */
-    private $handler;
+    private Handler $handler;
 
     protected function setUp(): void
     {
@@ -96,10 +94,9 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
      */
     public function it_fails_with_an_invalid_private_key()
     {
-        $handler = static::createHandlerWithInvalidPrivateKey();
-
         $this->expectException(CustomTokenCreationFailed::class);
-        $handler->handle(CreateCustomToken::forUid('uid'));
+
+        static::createHandlerWithInvalidPrivateKey()->handle(CreateCustomToken::forUid('uid'));
     }
 
     /**

@@ -6,14 +6,13 @@ namespace Kreait\Firebase\JWT;
 
 final class Token implements Contract\Token
 {
-    /** @var string */
-    private $encodedString;
+    private string $encodedString;
 
     /** @var array<string, mixed> */
-    private $headers;
+    private array $headers = [];
 
     /** @var array<string, mixed> */
-    private $payload;
+    private array $payload = [];
 
     private function __construct()
     {

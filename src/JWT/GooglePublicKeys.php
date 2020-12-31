@@ -12,14 +12,11 @@ use Lcobucci\Clock\Clock;
 
 final class GooglePublicKeys implements Keys
 {
-    /** @var Clock */
-    private $clock;
+    private Clock $clock;
 
-    /** @var Handler */
-    private $handler;
+    private Handler $handler;
 
-    /** @var Keys|null */
-    private $keys;
+    private ?Keys $keys = null;
 
     public function __construct(Handler $handler, Clock $clock)
     {
