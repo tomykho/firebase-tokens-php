@@ -122,11 +122,7 @@ final class WithFirebaseJWT implements Handler
         return TokenInstance::withValues($tokenString, $headers, $payload);
     }
 
-    /**
-     * @param int|null $timestamp
-     * @param int $leeway
-     */
-    private function restoreJWTStaticVariables($timestamp, $leeway)
+    private function restoreJWTStaticVariables(?int $timestamp, int $leeway): void
     {
         JWT::$timestamp = $timestamp;
         JWT::$leeway = $leeway;

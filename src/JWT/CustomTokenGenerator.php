@@ -51,7 +51,7 @@ final class CustomTokenGenerator
     }
 
     /**
-     * @param array<string, mixed> $claims
+     * @param array<string, mixed>|null $claims
      * @param Duration|DateInterval|string|int $timeToLive
      *
      * @throws CustomTokenCreationFailed
